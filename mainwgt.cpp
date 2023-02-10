@@ -2,27 +2,21 @@
 #include <QDebug>
 
 MainWgt::MainWgt(QWidget *parent)
-    :QWidget(parent),
+    : QWidget(parent),
       sizeside(40),
       cellCount(10),
-
       oneFieldView(new QGraphicsView(this)),
       twoFieldView(new QGraphicsView(this)),
-
       lblfont(this->font()),
-
       shipCount(0),
-
       plblState(new QLabel(this)),
       plblTime(new QLabel(this)),
       plblScore(new QLabel(this)),
       plblFightState(new QLabel(this)),
-
       uflag(new QLabel(this)),
       eflag(new QLabel(this)),
       unick(new QLabel(this)),
       enick(new QLabel(this)),
-
       _header(new Header(this)),
       _addit(new Addit(this)),
       blockBg(new QLabel(this)),
@@ -32,22 +26,19 @@ MainWgt::MainWgt(QWidget *parent)
       _pwpmenu(new PWPMenu),
       _statmenu(new StatMenu),
       _menu(new Menu(this)),
-
       blockSize(0),
       lblWaitConnect(new QLabel(this)),
       psocket(nullptr),
-
       secondColor("04, 218, 253"),
       _gamestate(Creating),
       _fightside(Stop),
-
       _chat(new Chat(this))
 {
-
     for(qint8 i =0; i<2; ++i){
         seconds[i]=0;
         minutes[i]=0;
     }
+
     timer.setInterval(1000);
     connect(&timer, &QTimer::timeout, [this]{
         ++seconds[0];
@@ -1302,15 +1293,17 @@ void MainWgt::paintEvent(QPaintEvent *pe) {
     QVector<QPoint> points;
 
     pntr.setPen(QPen(Qt::blue, 1));
-    QPoint pntcenter(drwrct.width()/2, drwrct.height()/2);
+    QPoint pntcenter(drwrct.width() / 2, drwrct.height() / 2);
 
-    for(short int i = pntcenter.x(); i<drwrct.width(); i+=sizeside)
-        points<<QPoint(i, 0)<<QPoint(i, drwrct.height());
+    for (short int i = pntcenter.x(); i < drwrct.width(); i += sizeside)
+        points << QPoint(i, 0) << QPoint(i, drwrct.height());
+
     for(short int i = pntcenter.x(); i>0; i-=sizeside)
         points<<QPoint(i, 0)<<QPoint(i, drwrct.height());
 
     for(short int i = pntcenter.y(); i<drwrct.height(); i+=sizeside)
         points<<QPoint(0, i)<<QPoint(drwrct.width(), i);
+
     for(short int i = pntcenter.y(); i>0; i-=sizeside)
         points<<QPoint(0, i)<<QPoint(drwrct.width(), i);
 
@@ -1339,5 +1332,4 @@ void MainWgt::paintEvent(QPaintEvent *pe) {
 
 
     pntr.drawLines(points);
-
 }
